@@ -4,6 +4,17 @@
  * information about types, without rigidly specifying them.
  */
 
+// utility
+
+type ImmutableObject<T> = {
+  readonly [K in keyof T]: Immutable<T[K]>;
+}
+
+export type Immutable<T> = {
+  readonly [K in keyof T]: T[K] extends Function ? T[K] : ImmutableObject<T[K]>;
+}
+
+export type Snowflake = number
 export type Markdown = string;
 export type MimeType = string;
 export type Location = {
@@ -32,18 +43,20 @@ export type When = {
   timezone?: Timezone,
 };
 
-export type TagId = string;
+export type TagId = Snowflake;
 export type Tag = {
   id: TagId,
   /// The name of the tag. Consists of alphanumeric characters, dashes, and slashes for components.
   name: string,
 };
 
-export type AttachmentId = string;
+export type AttachmentId = Snowflake;
 /// An attachment on a note. This object only describes the metadata, contents
 /// for an attachment are available through a separate API endpoint.
 export type Attachment = {
   id: AttachmentId,
+  /// The SHA256 hash of this attachment
+  hash: string,
   /// The original filename of this attachment
   filename: string | null,
   /// The MIME type of this attachment
@@ -65,7 +78,7 @@ export type NoteFields = Partial<{
   attachments: AttachmentId[],
 }>;
 
-export type NoteId = string;
+export type NoteId = Snowflake;
 export type Note = {
   id: NoteId,
   fields: NoteFields,
@@ -89,7 +102,7 @@ export enum FilterType {
   LocationNear = "location_near",
 };
 
-/// Passes on any note
+/// Always passes
 export type FilterAnything = {
   op: FilterType.Anything,
   d: null,
@@ -190,13 +203,14 @@ export type OrderingComponent = {
   field: OrderableField,
   direction: OrderingDirection
 };
+export type Ordering = OrderingComponent[];
 
 export enum FeedOrigin {
   Start = "start",
   End = "end",
 }
 
-export type FeedId = string;
+export type FeedId = Snowflake;
 /// A dynamic list of notes
 export type Feed = {
   id: FeedId,
@@ -206,5 +220,30 @@ export type Feed = {
   /// Ex: a timeline might be End, and a task list might be Start
   origin: FeedOrigin,
   /// The fields that notes in this feed should be ordered by
-  ordering: OrderingComponent[],
+  ordering: Ordering,
+};
+
+/*
+ * === Oplog ==
+ * A log of all write operations to objects in the notebook.
+ */
+
+export enum OplogObjectType {
+  Note = "note",
+  Tag = "tag",
+  Feed = "feed",
+  Attachment = "attachment",
+}
+
+export type OplogEntryId = Snowflake;
+export type OplogEntry = {
+  /// The ID of this oplog entry
+  id: OplogEntryId,
+  /// The ID of the object described in this log
+  obj_id: Snowflake,
+  /// The type of the object described in this log
+  obj_type: OplogObjectType,
+
+  /// The data for the object, or null if it was deleted.
+  data: object | null, // crappy types are fine, for now (until we need to read oplog)
 };

@@ -9,9 +9,9 @@
  */
 
 import { getPreciseDistance } from "geolib";
-import { Note, Filter, FilterType, TextMatchRule } from "./types";
+import { Note, Filter, FilterType, TextMatchRule, Immutable } from "./types";
 
-export function noteMatchesFilter(note: Note, filter: Filter): boolean {
+export function noteMatchesFilter(note: Immutable<Note>, filter: Immutable<Filter>): boolean {
   switch (filter.op) {
     case FilterType.Anything:
       return true;
@@ -69,6 +69,6 @@ export function noteMatchesFilter(note: Note, filter: Filter): boolean {
   }
 }
 
-export function filterNotes(notes: Note[], filter: Filter): Note[] {
+export function filterNotes(notes: Immutable<Note>[], filter: Immutable<Filter>): Immutable<Note>[] {
   return notes.filter(note => noteMatchesFilter(note, filter));
 }
