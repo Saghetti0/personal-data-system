@@ -33,5 +33,5 @@ export function compareNotes(
   const createdCmp = strcmp(lhs.created_at, rhs.created_at);
   if (createdCmp !== 0) return createdCmp;
 
-  return strcmp(lhs.id, rhs.id);
+  return lhs.id - rhs.id;
 }

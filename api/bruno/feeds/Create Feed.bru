@@ -1,0 +1,32 @@
+meta {
+  name: Create Feed
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/feeds
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "All Notes",
+    "filter": {
+      "op": "anything",
+      "d": null
+    },
+    "origin": "end",
+    "ordering": [
+      {
+        "field": "when",
+        "direction": "desc"
+      }
+    ]
+  }
+}

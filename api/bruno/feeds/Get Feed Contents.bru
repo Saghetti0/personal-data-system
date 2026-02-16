@@ -1,0 +1,11 @@
+meta {
+  name: Get Feed Contents
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/feeds/{{feedId}}/contents
+  body: none
+  auth: none
+}

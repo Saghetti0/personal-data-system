@@ -18,8 +18,8 @@ export type Snowflake = number
 export type Markdown = string;
 export type MimeType = string;
 export type Location = {
-  lat: number,
-  lon: number,
+  lat: number;
+  lon: number;
 };
 
 /// A UTC ISO timestamp in string form
@@ -36,54 +36,54 @@ export enum WhenPrecision {
 
 /// A timestamp that includes additional semantic information.
 export type When = {
-  timestamp: IsoTimestamp,
+  timestamp: IsoTimestamp;
   // What precision this timestamp should have when rendered.
-  precision: WhenPrecision,
+  precision: WhenPrecision;
   // The timezone that this When is associated with. Note that the timestamp field is always UTC.
-  timezone?: Timezone,
+  timezone?: Timezone;
 };
 
 export type TagId = Snowflake;
 export type Tag = {
-  id: TagId,
+  id: TagId;
   /// The name of the tag. Consists of alphanumeric characters, dashes, and slashes for components.
-  name: string,
+  name: string;
 };
 
 export type AttachmentId = Snowflake;
 /// An attachment on a note. This object only describes the metadata, contents
 /// for an attachment are available through a separate API endpoint.
 export type Attachment = {
-  id: AttachmentId,
+  id: AttachmentId;
   /// The SHA256 hash of this attachment
-  hash: string,
+  hash: string;
   /// The original filename of this attachment
-  filename: string | null,
+  filename: string | null;
   /// The MIME type of this attachment
-  content_type: MimeType,
+  content_type: MimeType;
   /// The width of this attachment, in pixels
-  width: number | null,
+  width: number | null;
   /// The height of this attachment, in pixels
-  height: number | null,
+  height: number | null;
   /// The duration of this attachment, in seconds
-  duration: number | null,
+  duration: number | null;
 };
 
 export type NoteFields = Partial<{
-  title: string,
-  body: Markdown,
-  tags: TagId[],
-  when: When,
-  location: Location,
-  attachments: AttachmentId[],
+  title: string;
+  body: Markdown;
+  tags: TagId[];
+  when: When;
+  location: Location;
+  attachments: AttachmentId[];
 }>;
 
 export type NoteId = Snowflake;
 export type Note = {
-  id: NoteId,
-  fields: NoteFields,
-  created_at: IsoTimestamp,
-  last_modified_at: IsoTimestamp,
+  id: NoteId;
+  fields: NoteFields;
+  created_at: IsoTimestamp;
+  last_modified_at: IsoTimestamp;
 };
 
 /*
@@ -104,38 +104,38 @@ export enum FilterType {
 
 /// Always passes
 export type FilterAnything = {
-  op: FilterType.Anything,
-  d: null,
+  op: FilterType.Anything;
+  d: null;
 };
 
 /// Passes if all of the specified filters pass
 export type FilterAnd = {
-  op: FilterType.And,
-  d: Filter[],
+  op: FilterType.And;
+  d: Filter[];
 };
 
 /// Passes if any of the specified filters pass
 export type FilterOr = {
-  op: FilterType.Or,
-  d: Filter[],
+  op: FilterType.Or;
+  d: Filter[];
 };
 
 /// Passes only if the specified filter doesn't pass
 export type FilterNot = {
-  op: FilterType.Not,
-  d: Filter,
+  op: FilterType.Not;
+  d: Filter;
 };
 
 /// Passes if all of the specified fields exist on a note
 export type FilterHasFields = {
-  op: FilterType.HasFields,
-  d: (keyof NoteFields)[],
+  op: FilterType.HasFields;
+  d: (keyof NoteFields)[];
 };
 
 /// Passes if the note contains all of the specfified tags
 export type FilterTagsInclude = {
-  op: FilterType.TagsInclude,
-  d: TagId[],
+  op: FilterType.TagsInclude;
+  d: TagId[];
 };
 
 export enum TextMatchRule {
@@ -148,34 +148,34 @@ export enum TextMatchRule {
 
 /// Passes if the specified field matches text based on a rule
 export type FilterTextMatch = {
-  op: FilterType.TextMatch,
+  op: FilterType.TextMatch;
   d: {
     /// The field to match the text against
-    field: "title" | "body",
+    field: "title" | "body";
     /// The method to match the text with
-    mode: TextMatchRule,
+    mode: TextMatchRule;
     /// The text to match
-    text: string,
-  }
+    text: string;
+  };
 };
 
 /// Passes if the note's "when" falls within a range
 export type FilterTimeRange = {
-  op: FilterType.TimeRange,
+  op: FilterType.TimeRange;
   d: {
-    before?: IsoTimestamp | undefined,
-    after?: IsoTimestamp | undefined,
+    before?: IsoTimestamp | undefined;
+    after?: IsoTimestamp | undefined;
   }
 };
 
 /// Passes if the note's location is within a certain radius of a point
 export type FilterLocationNear = {
-  op: FilterType.LocationNear,
+  op: FilterType.LocationNear;
   d: {
     /// The point to compare the location to
-    loc: Location,
+    loc: Location;
     /// Maximum distance from this point, in kilometers
-    km: number,
+    km: number;
   }
 };
 
@@ -200,8 +200,8 @@ export enum OrderingDirection {
   Descending = "desc",
 };
 export type OrderingComponent = {
-  field: OrderableField,
-  direction: OrderingDirection
+  field: OrderableField;
+  direction: OrderingDirection;
 };
 export type Ordering = OrderingComponent[];
 
@@ -213,14 +213,14 @@ export enum FeedOrigin {
 export type FeedId = Snowflake;
 /// A dynamic list of notes
 export type Feed = {
-  id: FeedId,
-  name: string,
-  filter: Filter,
+  id: FeedId;
+  name: string;
+  filter: Filter;
   /// If opening the feed should bring you to the start or the end by default
   /// Ex: a timeline might be End, and a task list might be Start
-  origin: FeedOrigin,
+  origin: FeedOrigin;
   /// The fields that notes in this feed should be ordered by
-  ordering: Ordering,
+  ordering: Ordering;
 };
 
 /*
@@ -238,12 +238,12 @@ export enum OplogObjectType {
 export type OplogEntryId = Snowflake;
 export type OplogEntry = {
   /// The ID of this oplog entry
-  id: OplogEntryId,
+  id: OplogEntryId;
   /// The ID of the object described in this log
-  obj_id: Snowflake,
+  obj_id: Snowflake;
   /// The type of the object described in this log
-  obj_type: OplogObjectType,
+  obj_type: OplogObjectType;
 
   /// The data for the object, or null if it was deleted.
-  data: object | null, // crappy types are fine, for now (until we need to read oplog)
+  data: object | null; // crappy types are fine, for now (until we need to read oplog)
 };

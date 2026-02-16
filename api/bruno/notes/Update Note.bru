@@ -1,0 +1,27 @@
+meta {
+  name: Update Note
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/notes/{{noteId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "id": {{noteId}},
+    "fields": {
+      "title": "Updated Note",
+      "body": "Updated body content."
+    },
+    "created_at": "2026-01-01T00:00:00.000Z",
+    "last_modified_at": "2026-01-01T00:00:00.000Z"
+  }
+}

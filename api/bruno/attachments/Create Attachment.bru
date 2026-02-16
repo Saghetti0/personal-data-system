@@ -1,0 +1,26 @@
+meta {
+  name: Create Attachment
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/attachments
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "filename": "photo.jpg",
+    "content_type": "image/jpeg",
+    "width": 1920,
+    "height": 1080,
+    "duration": null
+  }
+}

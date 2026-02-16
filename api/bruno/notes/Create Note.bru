@@ -1,0 +1,24 @@
+meta {
+  name: Create Note
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/notes
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "fields": {
+      "title": "My Note",
+      "body": "Hello, world!"
+    }
+  }
+}

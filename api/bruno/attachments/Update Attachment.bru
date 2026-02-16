@@ -1,0 +1,27 @@
+meta {
+  name: Update Attachment
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/attachments/{{attachmentId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "id": {{attachmentId}},
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "filename": "photo-renamed.jpg",
+    "content_type": "image/jpeg",
+    "width": 1920,
+    "height": 1080,
+    "duration": null
+  }
+}

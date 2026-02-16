@@ -1,0 +1,22 @@
+meta {
+  name: Update Tag
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/tags/{{tagId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "id": {{tagId}},
+    "name": "work/project-x"
+  }
+}

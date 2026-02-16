@@ -1,0 +1,11 @@
+meta {
+  name: Delete Attachment
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/attachments/{{attachmentId}}
+  body: none
+  auth: none
+}

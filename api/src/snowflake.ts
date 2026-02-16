@@ -10,9 +10,10 @@ export class SnowflakeGenerator {
   private readonly sequenceBits = 10;
   private readonly maxSequence = (1 << this.sequenceBits) - 1; // 1023
 
-  // 40 bits for timestamp = ~140 years range
+  // 42 bits for timestamp = ~140 years range
+  // js only does bit shifts on u32, sighh
   private readonly timestampBits = 42;
-  private readonly maxTimestamp = (1 << this.timestampBits) - 1;
+  private readonly maxTimestamp = Number((1n << BigInt(this.timestampBits)) - 1n);
 
   /// Generate a unique snowflake ID
   generate(): Snowflake {
@@ -36,6 +37,8 @@ export class SnowflakeGenerator {
     }
 
     this.lastTimestamp = timestamp;
+
+    console.log(timestamp, this.maxTimestamp);
 
     if (timestamp > this.maxTimestamp) {
       throw new Error("timestamp overflow");
