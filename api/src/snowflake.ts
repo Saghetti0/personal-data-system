@@ -38,8 +38,6 @@ export class SnowflakeGenerator {
 
     this.lastTimestamp = timestamp;
 
-    console.log(timestamp, this.maxTimestamp);
-
     if (timestamp > this.maxTimestamp) {
       throw new Error("timestamp overflow");
     }
