@@ -42,7 +42,8 @@ export class SnowflakeGenerator {
       throw new Error("timestamp overflow");
     }
 
-    return (timestamp << this.sequenceBits) | this.sequence;
+    // curse javascript again (TODO: make this less awful)
+    return Number((BigInt(timestamp) << BigInt(this.sequenceBits)) | BigInt(this.sequence));
   }
 
   /**
