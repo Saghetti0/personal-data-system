@@ -1,4 +1,4 @@
-import { OplogEntry, OplogObjectType, Snowflake } from "./types";
+import { OplogEntry, OplogObjectType, Snowflake } from "@waltermin/pds-shared";
 import mysql from "mysql2/promise";
 import { encode, decode } from "@msgpack/msgpack";
 

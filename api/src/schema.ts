@@ -6,7 +6,12 @@ import {
   OrderingDirection,
   TextMatchRule,
   WhenPrecision,
-} from "./types";
+} from "@waltermin/pds-shared";
+
+// i really don't like this file because it's loosely coupled to shared/types.ts
+// it's must be in sync with types.ts, but this isn't enforced in any way :(
+// TODO: fix this? though it's not trivial, since there are special types in
+// this file specifically for the api
 
 export const SnowflakeSchema = z.number().int();
 

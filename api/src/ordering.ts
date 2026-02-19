@@ -1,4 +1,4 @@
-import { Immutable, Note, Ordering, OrderingDirection, When } from "./types";
+import { Immutable, Note, Ordering, OrderingDirection, When } from "@waltermin/pds-shared";
 
 function strcmp(a: string, b: string): number {
   return a < b ? -1 : a > b ? 1 : 0;

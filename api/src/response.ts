@@ -1,4 +1,4 @@
-import { Attachment, Immutable, Note, Tag } from "./types";
+import { Attachment, Immutable, Note, Tag } from "@waltermin/pds-shared";
 import { Notebook } from "./notebook";
 
 // TODO: refactor to be more flexible? maybe in a v2 api

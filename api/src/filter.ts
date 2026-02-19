@@ -9,7 +9,7 @@
  */
 
 import { getPreciseDistance } from "geolib";
-import { Note, Filter, FilterType, TextMatchRule, Immutable } from "./types";
+import { Note, Filter, FilterType, TextMatchRule, Immutable } from "@waltermin/pds-shared";
 
 export function noteMatchesFilter(note: Immutable<Note>, filter: Immutable<Filter>): boolean {
   switch (filter.op) {

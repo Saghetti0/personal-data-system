@@ -1,4 +1,4 @@
-import { Snowflake } from "./types";
+import { Snowflake } from "@waltermin/pds-shared";
 
 const SNOWFLAKE_EPOCH = new Date("2026-02-16T00:00:00.000Z").getTime();
 

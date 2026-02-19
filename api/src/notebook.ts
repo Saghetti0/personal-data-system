@@ -1,7 +1,7 @@
 import { filterNotes } from "./filter";
 import { compareNotes } from "./ordering";
 import { generateSnowflake } from "./snowflake";
-import { Attachment, AttachmentId, Feed, FeedId, Filter, Immutable, Note, NoteId, OplogEntry, OplogObjectType, Snowflake, Tag, TagId } from "./types";
+import { Attachment, AttachmentId, Feed, FeedId, Filter, Immutable, Note, NoteId, OplogEntry, OplogObjectType, Snowflake, Tag, TagId } from "@waltermin/pds-shared";
 import { Database } from "./db";
 import { Logger } from "pino";
 
