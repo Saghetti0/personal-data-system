@@ -11,6 +11,9 @@ const config = {
 			pages: "dist",
 			assets: "dist",
 		}),
+		alias: {
+			'$shared': '../shared/src',
+		},
 	}
 };
 
